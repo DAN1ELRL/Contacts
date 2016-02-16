@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">INNOCV</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="delete_contact">Delete</string>
+    <string name="edit_contact">Edit contact</string>
+    <string name="failed_call_api">Failed to make the call to the API</string>
+    <string name="detail_contact">Detail contact</string>
+    <string name="id_account">Id:</string>
+    <string name="name_account">Name:</string>
+    <string name="birthdate_account">Birthdate:</string>
+    <string name="contact_updated">Contact updated</string>
+    <string name="are_sure">¿Are you sure?</string>
+    <string name="action_search">Search</string>
+</resources>
