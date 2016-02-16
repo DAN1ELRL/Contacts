@@ -12,4 +12,6 @@
     <string name="contact_updated">Contact updated</string>
     <string name="are_sure">¿Are you sure?</string>
     <string name="action_search">Search</string>
+    <string name="fields_empty">Fields can not be empty</string>
+    <string name="save">Save</string>
 </resources>

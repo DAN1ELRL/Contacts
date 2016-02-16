@@ -24,10 +24,14 @@ import static android.view.View.VISIBLE;
 
 public class EditUser extends Fragment {
 
-    @Bind(R.id.editName)EditText name;
-    @Bind(R.id.editDay)EditText day;
-    @Bind(R.id.editMonth)EditText month;
-    @Bind(R.id.editYear)EditText year;
+    @Bind(R.id.editName)
+    EditText name;
+    @Bind(R.id.editDay)
+    EditText day;
+    @Bind(R.id.editMonth)
+    EditText month;
+    @Bind(R.id.editYear)
+    EditText year;
 
     private ArrayList<User> userList;
     private static boolean modeEdit = false;
@@ -48,11 +52,11 @@ public class EditUser extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((MainActivity)getActivity()).getFab().hide();
-        ((MainActivity)getActivity()).getArrowBack().setVisibility(VISIBLE);
-        ((MainActivity)getActivity()).getUndoIcon().setVisibility(VISIBLE);
-        ((MainActivity)getActivity()).getDeleteIcon().setVisibility(GONE);
-        ((MainActivity)getActivity()).getEditIcon().setVisibility(GONE);
+        ((MainActivity) getActivity()).getFab().hide();
+        ((MainActivity) getActivity()).getArrowBack().setVisibility(VISIBLE);
+        ((MainActivity) getActivity()).getUndoIcon().setVisibility(VISIBLE);
+        ((MainActivity) getActivity()).getDeleteIcon().setVisibility(GONE);
+        ((MainActivity) getActivity()).getEditIcon().setVisibility(GONE);
 
         if (getArguments() != null) {
             userList = getArguments().getParcelableArrayList("list");
@@ -67,9 +71,9 @@ public class EditUser extends Fragment {
 
         ButterKnife.bind(this, view);
         day.setFilters(new InputFilter[]{new InputFilterMinMax("1", "31")});
-        month.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "12")});
-        year.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "2016")});
-        if(userList!=null){
+        month.setFilters(new InputFilter[]{new InputFilterMinMax("1", "12")});
+        year.setFilters(new InputFilter[]{new InputFilterMinMax("1", "2016")});
+        if (userList != null) {
             modeEdit = true;
             name.setText(userList.get(0).getName());
             String date = userList.get(0).getBirthdate().split("T")[0];
@@ -77,14 +81,14 @@ public class EditUser extends Fragment {
             month.setText(date.split("-")[1]);
             day.setText(date.split("-")[2]);
 
-        }else{
+        } else {
             modeEdit = false;
-            ((MainActivity)getActivity()).getUndoIcon().setVisibility(GONE);
+            ((MainActivity) getActivity()).getUndoIcon().setVisibility(GONE);
         }
 
-        ((MainActivity)getActivity()).getUndoIcon().setOnClickListener(new View.OnClickListener() {
+        ((MainActivity) getActivity()).getUndoIcon().setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(userList!=null){
+                if (userList != null) {
                     User usr = userList.get(0);
                     name.setText(usr.getName());
                     String date = usr.getBirthdate().split("T")[0];
@@ -99,17 +103,20 @@ public class EditUser extends Fragment {
     }
 
     @OnClick(R.id.savebtn)
-    public void save(View v){
-        User usr = new User();
-        usr.setName(name.getText().toString());
-        String date = year.getText().toString() + "-" + month.getText().toString() + "-" + day.getText().toString();
-        usr.setBirthdate(date);
-        if(modeEdit){
-            usr.setId(userList.get(0).getId());
+    public void save(View v) {
+        if (name.getText().toString().equals("") || day.getText().toString().equals("") || month.getText().toString().equals("") || year.getText().toString().equals("")) {
+            ((MainActivity) getActivity()).showMessage(getString(R.string.fields_empty));
+        } else {
+            User usr = new User();
+            usr.setName(name.getText().toString());
+            String date = year.getText().toString() + "-" + month.getText().toString() + "-" + day.getText().toString();
+            usr.setBirthdate(date);
+            if (modeEdit) {
+                usr.setId(userList.get(0).getId());
+            }
+            ((MainActivity) getActivity()).onClickSaveUser(v, usr);
         }
-        ((MainActivity)getActivity()).onClickSaveUser(v, usr);
     }
-
 
 
 }

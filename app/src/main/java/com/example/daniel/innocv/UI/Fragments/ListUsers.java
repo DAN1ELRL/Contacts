@@ -31,11 +31,11 @@ import butterknife.ButterKnife;
 public class ListUsers extends Fragment  implements SearchView.OnQueryTextListener{
 
     @Bind(R.id.swipe) public SwipeRefreshLayout mSwipeRefreshLayout;
+    @Bind(R.id.list) RecyclerView recyclerView;
     private static ArrayList<User> users;
-    private static RecyclerView recyclerView;
     private UsersListAdapter adapter;
-    private static Context context;
-    private static View view;
+    private Context context;
+    private View view;
 
     public ListUsers() {
         // Required empty public constructor
@@ -65,7 +65,7 @@ public class ListUsers extends Fragment  implements SearchView.OnQueryTextListen
         ButterKnife.bind(this, view);
         loadSwipeRefreh();
         context = view.getContext();
-
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -77,8 +77,6 @@ public class ListUsers extends Fragment  implements SearchView.OnQueryTextListen
     }
 
     private void loadRecyclerView(){
-
-        recyclerView = (RecyclerView)view.findViewById(R.id.list);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
@@ -113,17 +111,10 @@ public class ListUsers extends Fragment  implements SearchView.OnQueryTextListen
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ((MainActivity)getActivity()).cbAllUsers(false);
+                ((MainActivity) getActivity()).cbAllUsers(false);
             }
         });
 
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        setHasOptionsMenu(true);
     }
 
 

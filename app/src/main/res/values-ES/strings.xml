@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">INNOCV</string>
     <string name="action_settings">Opciones</string>
-
     <string name="delete_contact">Delete</string>
     <string name="edit_contact">Editar contacto</string>
     <string name="failed_call_api">Error al hacer la llamada a la API</string>
@@ -13,5 +12,6 @@
     <string name="contact_updated">Contacto actualizado</string>
     <string name="are_sure">¿Estás seguro?</string>
     <string name="action_search">Buscar</string>
-
+    <string name="fields_empty">Los campos no pueden estar vacíos</string>
+    <string name="save">Guardar</string>
 </resources>
